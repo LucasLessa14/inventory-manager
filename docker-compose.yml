@@ -1,0 +1,21 @@
+version: '3'
+services: 
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    restart: always
+    ports:
+      - "8086:8086"
+    command: npm run start
+    depends_on: 
+      - postgres
+
+  postgres:
+    image: postgres:12
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment: 
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
